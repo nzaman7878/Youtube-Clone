@@ -4,6 +4,7 @@ import Body from './components/Body'
 import './App.css'
 import store from './utils/store'
 
+
 function App() {
   
 
@@ -11,8 +12,8 @@ function App() {
     <Provider store={store}>
 <div>
         <Head />
-   
         <Body />
+        
 </div>
 
     </Provider>
