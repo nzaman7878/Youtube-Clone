@@ -1,21 +1,29 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react";
 import { YOUTUBE_VIDEOS_API } from "../utils/constants";
-
+import VideoCard from "./VideoCard";
 
 const VideoContainer = () => {
-    useEffect(()=> {
+    const [videos, setVideos] = useState([]);
+    
+    useEffect(() => {
         getVideos();
     }, []);
 
     const getVideos = async () => {
-        const data = await fetch(YOUTUBE_VIDEOS_API);
-        const json = await data.json();
-        console.log(json);
+        try {
+            const data = await fetch(YOUTUBE_VIDEOS_API);
+            const json = await data.json();
+            setVideos(json.items);
+        } catch (error) {
+            console.error("Error fetching videos:", error);
+        }
     };
 
-  return (
-    <div>VideoContainer</div>
-  )
+    return (
+        <div>
+            {videos.length > 0 && <VideoCard info={videos[0]} />}
+        </div>
+    );
 }
 
-export default VideoContainer
+export default VideoContainer;
