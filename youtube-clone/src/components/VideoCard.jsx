@@ -1,23 +1,27 @@
+
+
 const VideoCard = ({ info }) => {
-    console.log(info);
-    // Destructure 'snippet' and 'statistics' from the 'info' object
-    const { snippet, statistics } = info;
+  const { snippet, statistics } = info;
+  const { channelTitle, title, thumbnails } = snippet;
 
-    // Destructure 'channelTitle', 'title', and 'thumbnails' from the 'snippet' object
-    const { channelTitle, title, thumbnails } = snippet;
+  return (
+    <div className="p-2 m-2 w-72 shadow-lg">
+      <img className="rounded-lg" alt="thumbnail" src={thumbnails.medium.url} />
+      <ul>
+        <li className="font-bold py-2">{title}</li>
+        <li>{channelTitle}</li>
+        <li>{statistics.viewCount} views</li>
+      </ul>
+    </div>
+  );
+};
 
-    return (
-        <div className="p-2 m-2 w-72 shadow-lg">
-            {/* Fix interpolation syntax in the 'src' attribute */}
-            <img className="rounded-lg" src={thumbnails.medium.url} alt="thumbnails" />
-            <ul>
-                <li className="font-bold py-2"> {title}</li>
-                <li>{channelTitle}</li>
-                {/* Access 'viewCount' property from the 'statistics' object */}
-                <li>{statistics.viewCount} views</li>
-            </ul>
-        </div>
-    );
+export const AdVideoCard = ({ info }) => {
+  return (
+    <div className="p-1 m-1 border border-red-900 ">
+      <VideoCard info={info} />
+    </div>
+  );
 };
 
 export default VideoCard;
